@@ -10,28 +10,28 @@ jobs:
   build:
     runs-on: macos-latest
 
-  steps:
-    - name: Checkout do código
-      uses: actions/checkout@v4
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-    - name: Compilar com xcodebuild
-      run: |
-        xcodebuild clean build \
-          -project "XboxControllerApp.xcodeproj" \
-          -scheme "XboxControllerApp" \
-          -destination 'platform=macOS' \
-          -configuration Debug \
-          -derivedDataPath build \
-          CODE_SIGN_IDENTITY="" \
-          CODE_SIGNING_REQUIRED=NO
+      - name: Compilar com xcodebuild
+        run: |
+          xcodebuild clean build \
+            -project "XboxControllerApp.xcodeproj" \
+            -scheme "XboxControllerApp" \
+            -destination 'platform=macOS' \
+            -configuration Debug \
+            -derivedDataPath build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO
 
-    - name: Zipar o App
-      run: |
-        cd build/Build/Products/Debug/
-        zip -r XboxControllerApp.zip "XboxControllerApp.app"
+      - name: Zipar o App
+        run: |
+          cd build/Build/Products/Debug/
+          zip -r XboxControllerApp.zip "XboxControllerApp.app"
 
-    - name: Upload do Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: macos-app-build
-        path: build/Build/Products/Debug/XboxControllerApp.zip
+      - name: Upload do Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-app-build
+          path: build/Build/Products/Debug/XboxControllerApp.zip
