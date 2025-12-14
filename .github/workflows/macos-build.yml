@@ -19,11 +19,13 @@ jobs:
           xcodebuild clean build \
             -project "XboxControllerApp.xcodeproj" \
             -scheme "XboxControllerApp" \
-            -destination 'platform=macOS' \
+            -destination 'generic/platform=macOS' \
             -configuration Debug \
             -derivedDataPath build \
             CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO
+            CODE_SIGNING_REQUIRED=NO \
+            ONLY_ACTIVE_ARCH=NO \
+            ARCHS="x86_64 arm64"
 
       - name: Zipar o App
         run: |
